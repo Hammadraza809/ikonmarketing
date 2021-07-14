@@ -22,8 +22,8 @@ function Main() {
                     return (
                         <div>
                             <div key={id} className={`msg ${uid == auth.currentUser.uid ? 'sent' : 'recevied'}`}>
-                                <img src={photoURL} alt="profile" />
-                                <p>{text}</p>
+                                {/* <img className="img" src={photoURL} alt="profile" /> */}
+                                <p className="text">{text}</p>
                             </div>
                         </div>
                     )
