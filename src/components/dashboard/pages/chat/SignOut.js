@@ -6,6 +6,15 @@ function SignOut() {
     return (
         <div>
             <Button
+                className="signoutBtn"
+                style={{
+                    backgroundColor: "rgb(41, 87, 163)",
+                    color: "white",
+                    float: "right",
+                    padding: "10px"
+                }}
+
+                variant="contained"
                 onClick={() => {
                     auth.signOut();
                 }}

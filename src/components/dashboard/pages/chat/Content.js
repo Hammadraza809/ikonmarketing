@@ -3,6 +3,7 @@ import { db, auth } from '../common/Config';
 import SignOut from './SignOut';
 import SndMsg from './SendMsg';
 import './Content.css'
+import Header from './Header';
 
 
 function Main() {
@@ -15,22 +16,28 @@ function Main() {
         })
     }, [])
     return (
-        <div>
-            <SignOut />
-            <div className='msgs'>
-                {messages.map(({ id, text, photoURL, uid }) => {
-                    return (
-                        <div>
-                            <div key={id} className={`msg ${uid == auth.currentUser.uid ? 'sent' : 'recevied'}`}>
-                                {/* <img className="img" src={photoURL} alt="profile" /> */}
-                                <p className="text">{text}</p>
-                            </div>
-                        </div>
-                    )
-                })}
+        <div className="main">
+            <div>
+                <Header />
             </div>
-            <SndMsg scroll={scroll} />
-            <div ref={scroll}></div>
+            <div className="wrapper">
+                <div className='msgs'>
+                    {messages.map(({ id, text, photoURL, uid }) => {
+                        return (
+                            <div>
+                                <div key={id} className={`msg ${uid == auth.currentUser.uid ? 'sent' : 'recevied'}`}>
+                                    {/* <img className="img" src={photoURL} alt="profile" /> */}
+                                    <p className="text">{text}</p>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+                <div className="sendMsg">
+                    <SndMsg scroll={scroll} />
+                    <div ref={scroll}></div>
+                </div>
+            </div>
         </div>
     )
 }
