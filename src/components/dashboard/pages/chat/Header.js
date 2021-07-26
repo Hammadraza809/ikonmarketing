@@ -14,9 +14,9 @@ function Header() {
                         <Col xs={6} sm={6} md={6} lg={6}>
                             <p className="displayName">{auth.currentUser.displayName}</p>
                         </Col>
-                        <Col xs={6} sm={6} md={6} lg={6}>
+                        {/* <Col xs={6} sm={6} md={6} lg={6}>
                             <SignOut />
-                        </Col>
+                        </Col> */}
                     </Row>
                 </Container>
             </div>
