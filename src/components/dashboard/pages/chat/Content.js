@@ -4,9 +4,11 @@ import SignOut from './SignOut';
 import SndMsg from './SendMsg';
 import './Content.css'
 import Header from './Header';
+import UsersWindow from './users-window/UsersWindow';
+import ChatContent from './chat-window/ChatContent';
 
 
-function Main() {
+function Main({props}) {
     const scroll = useRef();
     // console.log(auth.currentUser.displayName, auth.currentUser.email, auth.currentUser.uid, auth.currentUser.phoneNumber)
     // const [messages, setMessages] = useState([]);
@@ -16,11 +18,24 @@ function Main() {
     //     })
     // }, [])
     return (
-        <div className="main">
-            {/* <div>
+        <div className="main-wrapper">
+            <div className="main__chatbody">
+                <UsersWindow {...props} />
+
+                <ChatContent {...props}/>
+            </div>
+        </div>
+    )
+}
+
+export default Main;
+
+
+
+{/* <div>
                 <Header />
             </div> */}
-            {/* <div className="wrapper">
+{/* <div className="wrapper">
                 <div className='msgs'>
                     {messages.map(({ id, text, photoURL, uid }) => {
                         return (
@@ -38,24 +53,3 @@ function Main() {
                     <div ref={scroll}></div>
                 </div>
             </div> */}
-            <div className="main-window">
-                <div className="chat-window">
-                    <div className="header">
-                        <Header />
-                    </div>
-                    <div className="chat-room">
-
-                    </div>
-                    <div className="send-msg">
-
-                    </div>
-                </div>
-                <div className="chat-users">
-                    
-                </div>
-            </div>
-        </div>
-    )
-}
-
-export default Main;

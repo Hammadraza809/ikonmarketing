@@ -58,7 +58,7 @@ export default function ClippedDrawer(props) {
             case "Members":
                 return <Members />
             case "Messenger":
-                return <Chat />
+                return <Chat props={props} />
             case "notification":
                 return <Notification />
             default:

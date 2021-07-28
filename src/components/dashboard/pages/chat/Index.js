@@ -4,11 +4,11 @@ import SignIn from './SignIn';
 import { auth } from '../../pages/common/Config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-function Chat() {
+function Chat({props}) {
     const [user] = useAuthState(auth)
     return (
         <div>
-            {user ? <Content /> : <SignIn />}
+            {user ? <Content props={props.props} /> : <SignIn />}
         </div>
     )
 }
