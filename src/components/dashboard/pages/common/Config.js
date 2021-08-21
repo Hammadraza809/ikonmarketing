@@ -1,14 +1,15 @@
 import firebase from "firebase";
 
-var firebaseConfig = {
-    apiKey: "AIzaSyB5wxPueT7dBrP247VaSYTuuHH9V-0wFys",
-    authDomain: "ikon-mobilechatapp.firebaseapp.com",
-    projectId: "ikon-mobilechatapp",
-    storageBucket: "ikon-mobilechatapp.appspot.com",
-    messagingSenderId: "794954839666",
-    appId: "1:794954839666:web:c619370b1f6831452574eb",
-    measurementId: "G-5BL9XZFYYQ"
-};
+const firebaseConfig = {
+    apiKey: "AIzaSyCx9A-MgqIp3RyyXbKjZn1V_IuBJTakYV4",
+    authDomain: "ikonmaketingapp.firebaseapp.com",
+    databaseURL: "https://ikonmaketingapp-default-rtdb.firebaseio.com",
+    projectId: "ikonmaketingapp",
+    storageBucket: "ikonmaketingapp.appspot.com",
+    messagingSenderId: "123597930383",
+    appId: "1:123597930383:web:00b94b6a647857dd47d5fa",
+    measurementId: "G-H3V2WESK2Q"
+  };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
