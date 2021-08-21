@@ -4,7 +4,7 @@ import "../../Content.css";
 export class ChatHeader extends Component {
   render() {
     const data = this.props.data ? this.props.data : {};
-
+    console.log("data========",data);
     return (
       <div className="chat-header">
         <div className="chat-info">
@@ -19,8 +19,7 @@ export class ChatHeader extends Component {
             {/* image  */}
           </div>
           <div className="name-last-seen">
-            <p style={{ margin: 0 }}>Mahad</p>
-            <p style={{ margin: 0 }}>last seen yesterday at 9:15 PM</p>
+            <p style={{ margin: 0 }}>{data.username}</p>
           </div>
         </div>
       </div>

@@ -2,16 +2,15 @@ import React, { Component } from "react";
 
 export class ChatThumb extends Component {
   render() {
-    const { user_picture, user_name, time } = this.props.data;
-
+    const { username, userImage } = this.props.data;
     return (
       <div className="chat-thumb">
         <div className="avatar">
           {/* <Avatar src={`${user_image}${user_picture}`} size={52} /> */}
+          <img src={userImage} style={{ height: 50, width: 50 }} />
         </div>
         <div className="content">
-          <div className="name">Mahad</div>
-          <div className="time">4654654</div>
+          <div className="name">{username}</div>
         </div>
       </div>
     );

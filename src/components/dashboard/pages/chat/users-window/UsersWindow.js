@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../Content.css";
 import ChatThumb from "./chat-thumb/ChatThumb";
 import firebase from "firebase";
+import { getChatRoom } from "../../../firebase";
 
 class UsersWindow extends Component {
   constructor(props) {
@@ -17,20 +18,20 @@ class UsersWindow extends Component {
   }
 
   componentDidMount() {
-    console.log("chl rha hy");
-    firebase
-      .firestore()
-      .collection("messages")
-      .get()
-      .then((data) => {
-        // console.log(data)
-        data.forEach((snapshot) => {
-          console.log(snapshot.data());
-        });
-      });
+    this.getChatRooms()
   }
-  showChat(id) {
-    this.props.push(`/chat/1`);
+  getChatRooms = async() =>{
+    try {
+      const room = await getChatRoom()
+      this.setState({data: room})
+    } catch (error) {
+      
+    }
+  }
+  showChat(e) {
+    localStorage.setItem('UserInfo', JSON.stringify({username: e.username, userImage: e.userImage }))
+    // console.log(e.id);
+    // this.props.push(`/chat/1`);
   }
   render() {
     const { data } = this.state;
@@ -45,7 +46,7 @@ class UsersWindow extends Component {
           <div className="recent-chats">
             {data.map((e, i) => {
               return (
-                <div onClick={() => this.showChat(1)} key={i}>
+                <div onClick={() => this.showChat(e)} key={i}>
                   <ChatThumb data={e} />
                 </div>
               );
