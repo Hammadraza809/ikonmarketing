@@ -14,11 +14,12 @@ export class ChatWindow extends Component {
 
     render() {
 
-        const { currentUserChat } = this.props;
+        const userInfo = localStorage.getItem('UserInfo')
+        const currentUserChat = JSON.parse(userInfo)
         return (
             <div className="chat-window-wrapper">
                 <div>
-                    <ChatHeader />
+                    <ChatHeader data={currentUserChat} />
                 </div>
 
                 <div className="chat-wrapper">
