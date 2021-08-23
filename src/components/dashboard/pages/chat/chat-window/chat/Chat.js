@@ -5,8 +5,7 @@ import "../../Content.css";
 import send from "../../../../../../assets/images/send.png";
 import { sendMessageToDB } from "../../../../firebase";
 
-const moment = require('moment')
-
+const moment = require("moment");
 
 export class Chat extends Component {
   constructor() {
@@ -26,25 +25,29 @@ export class Chat extends Component {
   }
 
   getMessagesFromServer = async () => {
-    const roomId = '5n8XNB801hYwtM3q1Awy' //this.props.match.params.id
-    firebase.firestore().collection('chatroom').doc(roomId).collection('messages')
-    .orderBy('timestamp')
-    .onSnapshot((snapshot)=>{
-      let messages = []
-        snapshot.forEach((doc) =>{
-            messages.push(doc.data())
-        })
-        this.setState({msgList: messages},()=>{
-          const scrollHeight = this.messageList.scrollHeight
-          const height = this.messageList.clientHeight
-          const maxScrollTop = scrollHeight - height
-          this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0
-        })
-    })
+    const roomId = "5n8XNB801hYwtM3q1Awy"; //this.props.match.params.id
+    firebase
+      .firestore()
+      .collection("chatroom")
+      .doc(roomId)
+      .collection("messages")
+      .orderBy("timestamp")
+      .onSnapshot((snapshot) => {
+        let messages = [];
+        snapshot.forEach((doc) => {
+          messages.push(doc.data());
+        });
+        this.setState({ msgList: messages }, () => {
+          const scrollHeight = this.messageList.scrollHeight;
+          const height = this.messageList.clientHeight;
+          const maxScrollTop = scrollHeight - height;
+          this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+        });
+      });
   };
 
   onSend = () => {
-    const roomId = '5n8XNB801hYwtM3q1Awy' //this.props.match.params.id
+    const roomId = "5n8XNB801hYwtM3q1Awy"; //this.props.match.params.id
     const { text, msgList } = this.state;
     if (text === "") {
       console.log("ha ");
@@ -66,9 +69,12 @@ export class Chat extends Component {
   };
 
   chatContentBody = () => (
-    <div className="chat-content-body" ref={(el) => this.messageList = el} style={{overflow: 'scroll'}}>
+    <div
+      className="chat-content-body"
+      ref={(el) => (this.messageList = el)}
+      style={{ overflow: "scroll" }}
+    >
       {this.state.msgList.map((elm, i) => {
-       
         return (
           <>
             {elm.userId != this.state.userId ? (
@@ -76,7 +82,9 @@ export class Chat extends Component {
                 <div className="message">
                   <span>{elm.message_body}</span>
                   <br />
-                  <span style={{fontSize:12}}>{moment(elm.timestamp).format('LT')}</span>
+                  <span style={{ fontSize: 10, float: "right" }}>
+                    {moment(elm.timestamp).format("LT")}
+                  </span>
                 </div>
               </div>
             ) : (
@@ -84,7 +92,9 @@ export class Chat extends Component {
                 <div className="message  sent">
                   <span>{elm.message_body}</span>
                   <br />
-                  <span style={{fontSize:12}}>{moment(elm.timestamp).format('LT')}</span>
+                  <span style={{ fontSize: 10, float: "right" }}>
+                    {moment(elm.timestamp).format("LT")}
+                  </span>
                 </div>
               </div>
             )}

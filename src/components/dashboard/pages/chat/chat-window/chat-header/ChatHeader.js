@@ -4,7 +4,7 @@ import "../../Content.css";
 export class ChatHeader extends Component {
   render() {
     const data = this.props.data ? this.props.data : {};
-    console.log("data========",data);
+    console.log("data========", data);
     return (
       <div className="chat-header">
         <div className="chat-info">
@@ -16,7 +16,7 @@ export class ChatHeader extends Component {
               borderRadius: "50px",
             }}
           >
-            {/* image  */}
+            {/* image here */}
           </div>
           <div className="name-last-seen">
             <p style={{ margin: 0 }}>{data.username}</p>
