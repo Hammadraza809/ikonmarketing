@@ -11,7 +11,7 @@ export class Chat extends Component {
     super();
     this.state = {
       info: {},
-      senderId: "hPxR14wDnXcbvRmglRa3poI1m1k2",
+      senderId: "ZyR3tVmyINdHiYtyG3KgPYHpovF3",
       msgList: [],
       currentUser: "",
       chats: [],
@@ -51,9 +51,12 @@ export class Chat extends Component {
     if (text === "") {
     } else {
       let msgObj = {
-        senderId: "hPxR14wDnXcbvRmglRa3poI1m1k2", //current user
+        senderId: "ZyR3tVmyINdHiYtyG3KgPYHpovF3", //current user
         message_body: text,
         timestamp: Date.now(),
+        receiverId: "hPxR14wDnXcbvRmglRa3poI1m1k2",
+        receiverName: "",
+        senderName: "",
       };
       sendMessageToDB(msgObj, roomId);
       this.setState({
@@ -75,7 +78,7 @@ export class Chat extends Component {
       {this.state.msgList.map((elm, i) => {
         return (
           <>
-            {elm.userId != this.state.userId ? (
+            {elm.senderId !== this.state.senderId ? (
               <div className="message-wrapper" key={i}>
                 <div className="message">
                   <span>{elm.message_body}</span>
