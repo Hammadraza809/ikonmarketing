@@ -1,4 +1,3 @@
-import { Button } from "bootstrap";
 import React, { Component } from "react";
 import firebase from "firebase";
 import "../../Content.css";
@@ -50,7 +49,6 @@ export class Chat extends Component {
     const roomId = "5n8XNB801hYwtM3q1Awy"; //this.props.match.params.id
     const { text, msgList } = this.state;
     if (text === "") {
-      console.log("ha ");
     } else {
       let msgObj = {
         userId: 1, //current user
@@ -106,21 +104,32 @@ export class Chat extends Component {
   chatContentFooter = () => (
     <div className="input-box">
       <input
+        className="input"
         type="text"
+        style={{
+          padding: 8,
+          width: "95%",
+          borderRadius: "5px",
+          fontSize: 15,
+        }}
         ref={(ref) => {
           this.textInput = ref;
         }}
         value={this.state.text}
         onChange={(e) => this.setState({ text: e.target.value })}
-      />
-      <input
-        style={{
-          background: `url(${send})`,
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            this.onSend();
+          }
         }}
-        type="button"
-        // value="send"
-        onClick={() => this.onSend()}
       />
+      <button
+        type="submit"
+        onClick={() => this.onSend()}
+        style={{ border: "none", background: "none", marginLeft: 10 }}
+      >
+        <img alt="send" src={send} style={{ width: 40 }} />
+      </button>
     </div>
   );
 

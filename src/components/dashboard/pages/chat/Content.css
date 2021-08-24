@@ -137,14 +137,13 @@
 /* input box */
 .input-box {
   flex: 1;
-  background-color: red;
-  /* // background: rgba(247, 243, 243, 0.404); */
   padding: 10px 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+
 .form-field {
   flex: 1;
   flex-direction: row;
