@@ -18,7 +18,7 @@
 
 /* user chat window */
 .user-window-wraper {
-  flex: 2;
+  flex: 1.5;
 }
 .user-window-wrapper {
   background: #f7f5f5;
@@ -56,6 +56,7 @@
   margin-right: 20px;
   margin-bottom: 5px;
   border-radius: 10px;
+  align-items: center;
 }
 .content {
   content: "";
@@ -66,13 +67,14 @@
   display: flex;
   justify-content: space-between;
   text-transform: capitalize;
+  margin-bottom: 12px;
 }
 .name {
   margin-left: 60px;
-  font-size: 20px;
+  font-size: 15px;
   columns: #000000;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 /* message window */

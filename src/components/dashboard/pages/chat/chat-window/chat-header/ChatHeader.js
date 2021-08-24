@@ -19,7 +19,7 @@ export class ChatHeader extends Component {
             {/* image here */}
           </div>
           <div className="name-last-seen">
-            <p style={{ margin: 0 }}>{data.username}</p>
+            <p style={{ margin: 0 }}>{data.userName}</p>
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ export class Chat extends Component {
     super();
     this.state = {
       info: {},
-      userId: 1,
+      senderId: "hPxR14wDnXcbvRmglRa3poI1m1k2",
       msgList: [],
       currentUser: "",
       chats: [],
@@ -24,10 +24,10 @@ export class Chat extends Component {
   }
 
   getMessagesFromServer = async () => {
-    const roomId = "5n8XNB801hYwtM3q1Awy"; //this.props.match.params.id
+    const roomId = "hPxR14wDnXcbvRmglRa3poI1m1k2"; //this.props.match.params.id
     firebase
       .firestore()
-      .collection("chatroom")
+      .collection("ChatRooms")
       .doc(roomId)
       .collection("messages")
       .orderBy("timestamp")
@@ -46,12 +46,12 @@ export class Chat extends Component {
   };
 
   onSend = () => {
-    const roomId = "5n8XNB801hYwtM3q1Awy"; //this.props.match.params.id
+    const roomId = "hPxR14wDnXcbvRmglRa3poI1m1k2"; //this.props.match.params.id
     const { text, msgList } = this.state;
     if (text === "") {
     } else {
       let msgObj = {
-        userId: 1, //current user
+        senderId: "hPxR14wDnXcbvRmglRa3poI1m1k2", //current user
         message_body: text,
         timestamp: Date.now(),
       };

@@ -29,7 +29,7 @@ class UsersWindow extends Component {
   showChat(e) {
     localStorage.setItem(
       "UserInfo",
-      JSON.stringify({ username: e.username, userImage: e.userImage })
+      JSON.stringify({ userName: e.userName, userImage: e.userImage })
     );
     // console.log(e.id);
     // this.props.push(`/chat/1`);
