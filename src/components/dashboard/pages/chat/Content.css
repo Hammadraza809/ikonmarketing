@@ -18,7 +18,7 @@
 
 /* user chat window */
 .user-window-wraper {
-  flex: 1.5;
+  flex: 2;
 }
 .user-window-wrapper {
   background: #f7f5f5;

@@ -54,7 +54,7 @@ export class Chat extends Component {
         senderId: "ZyR3tVmyINdHiYtyG3KgPYHpovF3", //current user
         message_body: text,
         timestamp: Date.now(),
-        receiverId: "hPxR14wDnXcbvRmglRa3poI1m1k2",
+        receiverId: "hPxR14wDnXcbvRmglRa3poI1m1k2", //mobile user
         receiverName: "",
         senderName: "",
       };
