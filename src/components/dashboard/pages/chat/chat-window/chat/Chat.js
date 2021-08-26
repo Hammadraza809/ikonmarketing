@@ -24,7 +24,7 @@ export class Chat extends Component {
   }
 
   getMessagesFromServer = async () => {
-    const roomId = "hPxR14wDnXcbvRmglRa3poI1m1k2"; //this.props.match.params.id
+    const roomId = "ornTHSiJKohu0qfGrK9T1V950dV2"; //this.props.match.params.id
     firebase
       .firestore()
       .collection("ChatRooms")
@@ -46,7 +46,7 @@ export class Chat extends Component {
   };
 
   onSend = () => {
-    const roomId = "hPxR14wDnXcbvRmglRa3poI1m1k2"; //this.props.match.params.id
+    const roomId = "ornTHSiJKohu0qfGrK9T1V950dV2"; //this.props.match.params.id
     const { text, msgList } = this.state;
     if (text === "") {
     } else {
@@ -54,7 +54,7 @@ export class Chat extends Component {
         senderId: "ZyR3tVmyINdHiYtyG3KgPYHpovF3", //current user
         message_body: text,
         timestamp: Date.now(),
-        receiverId: "hPxR14wDnXcbvRmglRa3poI1m1k2", //mobile user
+        receiverId: "ornTHSiJKohu0qfGrK9T1V950dV2", //mobile user
         receiverName: "",
         senderName: "",
       };
