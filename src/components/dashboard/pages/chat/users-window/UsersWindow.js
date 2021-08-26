@@ -18,18 +18,19 @@ class UsersWindow extends Component {
   }
 
   componentDidMount() {
-    this.getChatRooms()
+    this.getChatRooms();
   }
-  getChatRooms = async() =>{
+  getChatRooms = async () => {
     try {
-      const room = await getChatRoom()
-      this.setState({data: room})
-    } catch (error) {
-      
-    }
-  }
+      const room = await getChatRoom();
+      this.setState({ data: room });
+    } catch (error) {}
+  };
   showChat(e) {
-    localStorage.setItem('UserInfo', JSON.stringify({username: e.username, userImage: e.userImage }))
+    localStorage.setItem(
+      "UserInfo",
+      JSON.stringify({ userName: e.userName, userImage: e.userImage })
+    );
     // console.log(e.id);
     // this.props.push(`/chat/1`);
   }
@@ -40,7 +41,7 @@ class UsersWindow extends Component {
         <div className="user-window">
           <div className="new-recent-chat">
             <div className="recent-chats-heading">
-              <p>RECENT CHATS</p>
+              <p>recent chats</p>
             </div>
           </div>
           <div className="recent-chats">
