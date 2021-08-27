@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../Content.css";
 import ChatThumb from "./chat-thumb/ChatThumb";
 import firebase from "firebase";
+import {Link} from "react-router-dom";
 import { getChatRoom } from "../../../firebase";
 
 class UsersWindow extends Component {
@@ -47,9 +48,11 @@ class UsersWindow extends Component {
           <div className="recent-chats">
             {data.map((e, i) => {
               return (
-                <div onClick={() => this.showChat(e)} key={i}>
+                <Link to={`/chat/${1}`} 
+                // onClick={() => this.showChat(e)} 
+                key={i}>
                   <ChatThumb data={e} />
-                </div>
+                </Link>
               );
             })}
           </div>
