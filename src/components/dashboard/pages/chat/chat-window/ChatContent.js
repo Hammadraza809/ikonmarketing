@@ -9,7 +9,7 @@ const ConversationEmpty = () => (
       <div className="text-center">
         {/* <img src={emptyImage} alt="Start a Conversation" /> */}
         <h1 className="font-weight-light text-center">Start a conversation</h1>
-        <ChatWindow></ChatWindow>
+       
       </div>
     </div>
   </div>
@@ -20,8 +20,7 @@ class ChatContent extends React.Component {
    
     return (
       <Switch>
-        <Route path="/chat/:id" component={ChatWindow} />
-        {/* <Route  path="/" component={ChatWindow} /> */}
+        <Route path="/dashboard/chat/:id" component={ChatWindow} />
         <Route path="/" component={ConversationEmpty} />
       </Switch>
     );

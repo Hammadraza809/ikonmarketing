@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../Content.css";
 import ChatThumb from "./chat-thumb/ChatThumb";
 import firebase from "firebase";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getChatRoom } from "../../../firebase";
 
 class UsersWindow extends Component {
@@ -25,15 +25,14 @@ class UsersWindow extends Component {
     try {
       const room = await getChatRoom();
       this.setState({ data: room });
-    } catch (error) {}
+    } catch (error) { }
   };
   showChat(e) {
+    console.log(e);
     localStorage.setItem(
       "UserInfo",
       JSON.stringify({ userName: e.userName, userImage: e.userImage })
     );
-    // console.log(e.id);
-    // this.props.push(`/chat/1`);
   }
   render() {
     const { data } = this.state;
@@ -48,9 +47,9 @@ class UsersWindow extends Component {
           <div className="recent-chats">
             {data.map((e, i) => {
               return (
-                <Link to={`/chat/${1}`} 
-                // onClick={() => this.showChat(e)} 
-                key={i}>
+                <Link to={`/dashboard/chat/${e.id}`}
+                  onClick={() => this.showChat(e)}
+                  key={i}>
                   <ChatThumb data={e} />
                 </Link>
               );

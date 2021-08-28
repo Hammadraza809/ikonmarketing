@@ -16,19 +16,19 @@ export class Chat extends Component {
       currentUser: "",
       chats: [],
       text: "",
+
     };
   }
 
   componentDidMount() {
-    this.getMessagesFromServer();
+    this.getConversation(this.getUserId());
   }
 
-  getMessagesFromServer = async () => {
-    const roomId = "ornTHSiJKohu0qfGrK9T1V950dV2"; //this.props.match.params.id
+  getConversation = currentId => {
     firebase
       .firestore()
       .collection("ChatRooms")
-      .doc(roomId)
+      .doc(currentId)
       .collection("messages")
       .orderBy("timestamp")
       .onSnapshot((snapshot) => {
@@ -45,8 +45,19 @@ export class Chat extends Component {
       });
   };
 
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.getConversation(this.getUserId())
+    }
+  }
+
+  getUserId() {
+    const { id } = this.props.match.params
+    return id
+  }
+
   onSend = () => {
-    const roomId = "ornTHSiJKohu0qfGrK9T1V950dV2"; //this.props.match.params.id
+    const { roomId } = this.props.match.params
     const { text, msgList } = this.state;
     if (text === "") {
     } else {
@@ -137,6 +148,7 @@ export class Chat extends Component {
   );
 
   render() {
+
     return (
       <div className="chat-content">
         {/* {this.chatContentHeader(info.name)} */}

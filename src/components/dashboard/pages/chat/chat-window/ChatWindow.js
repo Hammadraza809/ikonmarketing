@@ -10,6 +10,7 @@ export class ChatWindow extends Component {
   }
 
   render() {
+    
     const userInfo = localStorage.getItem("UserInfo");
     const currentUserChat = JSON.parse(userInfo);
     return (
@@ -19,7 +20,7 @@ export class ChatWindow extends Component {
         </div>
 
         <div className="chat-wrapper">
-          <Chat />
+          <Chat match={this.props.match} location={this.props.location} />
         </div>
       </div>
     );
