@@ -20,7 +20,7 @@ export class ChatWindow extends Component {
         </div>
 
         <div className="chat-wrapper">
-          <Chat match={this.props.match} location={this.props.location} />
+          <Chat match={this.props.match} location={this.props.location} data={currentUserChat} />
         </div>
       </div>
     );

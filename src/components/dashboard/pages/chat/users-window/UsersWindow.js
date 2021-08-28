@@ -28,10 +28,10 @@ class UsersWindow extends Component {
     } catch (error) { }
   };
   showChat(e) {
-    console.log(e);
+  
     localStorage.setItem(
       "UserInfo",
-      JSON.stringify({ userName: e.userName, userImage: e.userImage })
+      JSON.stringify({ userName: e.userName, userImage: e.userImage, receiverId: e.senderId })
     );
   }
   render() {

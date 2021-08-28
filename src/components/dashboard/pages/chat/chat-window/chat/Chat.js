@@ -58,6 +58,7 @@ export class Chat extends Component {
 
   onSend = () => {
     const { roomId } = this.props.match.params
+    const { receiverId } = this.props.data;
     const { text, msgList } = this.state;
     if (text === "") {
     } else {
@@ -65,7 +66,7 @@ export class Chat extends Component {
         senderId: "ZyR3tVmyINdHiYtyG3KgPYHpovF3", //current user
         message_body: text,
         timestamp: Date.now(),
-        receiverId: "ornTHSiJKohu0qfGrK9T1V950dV2", //mobile user
+        receiverId: receiverId, //mobile user
         receiverName: "",
         senderName: "",
       };
