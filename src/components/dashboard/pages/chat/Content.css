@@ -75,6 +75,7 @@
   columns: #000000;
   font-weight: 500;
   margin-bottom: 5px;
+  color: black;
 }
 
 /* message window */
@@ -84,6 +85,9 @@
   background-color: white;
   display: flex;
   flex-direction: column;
+}
+.chat-content-empty {
+  text-align: center;
 }
 
 /* message window header */

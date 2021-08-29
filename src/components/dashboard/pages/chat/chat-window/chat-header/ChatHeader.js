@@ -12,11 +12,10 @@ export class ChatHeader extends Component {
             style={{
               height: 70,
               width: 70,
-              backgroundColor: "red",
               borderRadius: "50px",
             }}
           >
-            {/* image here */}
+            <img alt="user" src={data.userImage} />
           </div>
           <div className="name-last-seen">
             <p style={{ margin: 0 }}>{data.userName}</p>

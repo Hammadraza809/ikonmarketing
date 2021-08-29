@@ -13,7 +13,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { Group, ExitToApp, Forum, Notifications } from "@material-ui/icons";
 import Chat from "../dashboard/pages/chat/Index";
 import Members from "./pages/Members";
-import Notification from "./pages/Notification";
+import Notification from "../dashboard/pages/notification/Notification";
 
 const drawerWidth = 210;
 

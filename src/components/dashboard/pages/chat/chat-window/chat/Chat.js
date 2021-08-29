@@ -49,6 +49,7 @@ export class Chat extends Component {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.getConversation(this.getUserId())
     }
+    this.scrollToBottom()
   }
 
   getUserId() {
@@ -56,7 +57,12 @@ export class Chat extends Component {
     return id
   }
 
+  scrollToBottom = () => {
+    this.messageList.scrollIntoView({ behavior: "smooth" });
+  }
+
   onSend = () => {
+   
     const { roomId } = this.props.match.params
     const { receiverId } = this.props.data;
     const { text, msgList } = this.state;
@@ -74,7 +80,15 @@ export class Chat extends Component {
       this.setState({
         text: "",
         msgList: [...msgList, msgObj],
-      });
+      },
+      () => {
+        const scrollHeight = this.messageList.scrollHeight;
+        const height = this.messageList.clientHeight;
+        const maxScrollTop = scrollHeight - height;
+        this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+      }
+      );
+      
     }
   };
   emptyClick = (e) => {
@@ -149,7 +163,7 @@ export class Chat extends Component {
   );
 
   render() {
-
+   
     return (
       <div className="chat-content">
         {/* {this.chatContentHeader(info.name)} */}
