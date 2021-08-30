@@ -69,6 +69,7 @@ function Notification() {
     let legacy_server_key =
       "AAAAHMcCv48:APA91bGn8--eYwio-dxSTfHNZiY_wsj-zP1LVXtWIPfzeZ9ief05S_Bj5vo_E089jR_CDd-u3MKy2zrZtoRe1zcXy5xgOI1PXJ5tZEe9hcB19CHRMLlvrddTcT-c7pWZ31KiYCbSiX_T";
     setLoading(true);
+    setBackdrop(true);
     for (let i = 0; i < tokens.length; i++) {
       fetch("https://fcm.googleapis.com/fcm/send", {
         method: "POST",
@@ -85,11 +86,15 @@ function Notification() {
         }),
       })
         .then((result) => {
-          console.log(result);
           setLoading(false);
         })
         .catch((err) => console.log(err));
     }
+    firebase
+      .firestore()
+      .collection("Notifications")
+      .add({ title: data.title, body: data.detail });
+    setBackdrop(false);
   };
 
   return (

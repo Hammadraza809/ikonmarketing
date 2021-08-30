@@ -16,7 +16,6 @@ export class Chat extends Component {
       currentUser: "",
       chats: [],
       text: "",
-
     };
   }
 
@@ -24,7 +23,7 @@ export class Chat extends Component {
     this.getConversation(this.getUserId());
   }
 
-  getConversation = currentId => {
+  getConversation = (currentId) => {
     firebase
       .firestore()
       .collection("ChatRooms")
@@ -47,23 +46,22 @@ export class Chat extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.getConversation(this.getUserId())
+      this.getConversation(this.getUserId());
     }
-    this.scrollToBottom()
+    this.scrollToBottom();
   }
 
   getUserId() {
-    const { id } = this.props.match.params
-    return id
+    const { id } = this.props.match.params;
+    return id;
   }
 
   scrollToBottom = () => {
     this.messageList.scrollIntoView({ behavior: "smooth" });
-  }
+  };
 
   onSend = () => {
-   
-    const { roomId } = this.props.match.params
+    const { roomId } = this.props.match.params;
     const { receiverId } = this.props.data;
     const { text, msgList } = this.state;
     if (text === "") {
@@ -77,18 +75,18 @@ export class Chat extends Component {
         senderName: "",
       };
       sendMessageToDB(msgObj, roomId);
-      this.setState({
-        text: "",
-        msgList: [...msgList, msgObj],
-      },
-      () => {
-        const scrollHeight = this.messageList.scrollHeight;
-        const height = this.messageList.clientHeight;
-        const maxScrollTop = scrollHeight - height;
-        this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
-      }
+      this.setState(
+        {
+          text: "",
+          msgList: [...msgList, msgObj],
+        },
+        () => {
+          const scrollHeight = this.messageList.scrollHeight;
+          const height = this.messageList.clientHeight;
+          const maxScrollTop = scrollHeight - height;
+          this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+        }
       );
-      
     }
   };
   emptyClick = (e) => {
@@ -163,7 +161,6 @@ export class Chat extends Component {
   );
 
   render() {
-   
     return (
       <div className="chat-content">
         {/* {this.chatContentHeader(info.name)} */}
