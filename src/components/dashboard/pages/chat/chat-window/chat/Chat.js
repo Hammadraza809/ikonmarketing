@@ -61,7 +61,8 @@ export class Chat extends Component {
   };
 
   onSend = () => {
-    const { roomId } = this.props.match.params;
+    const { id } = this.props.match.params;
+    
     const { receiverId } = this.props.data;
     const { text, msgList } = this.state;
     if (text === "") {
@@ -74,7 +75,7 @@ export class Chat extends Component {
         receiverName: "",
         senderName: "",
       };
-      sendMessageToDB(msgObj, roomId);
+      sendMessageToDB(msgObj, id);
       this.setState(
         {
           text: "",

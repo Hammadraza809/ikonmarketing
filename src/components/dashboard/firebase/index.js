@@ -21,6 +21,7 @@ function getChatRoom() {
 }
 
 function sendMessageToDB(obj, roomId) {
+ 
   firebase
     .firestore()
     .collection("ChatRooms")
