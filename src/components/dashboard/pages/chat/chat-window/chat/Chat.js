@@ -62,7 +62,7 @@ export class Chat extends Component {
 
   onSend = () => {
     const { id } = this.props.match.params;
-    
+
     const { receiverId } = this.props.data;
     const { text, msgList } = this.state;
     if (text === "") {

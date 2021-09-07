@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./Content.css";
-import logo from "../../assets/images/logo.png";
+import "../../home/Content.css";
+import logo from "../../../assets/images/logo.png";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container } from "react-bootstrap";
 import TextField from "@material-ui/core/TextField";
@@ -49,18 +49,20 @@ const MyTextField = ({ type, rows, multiline, placeholder, ...props }) => {
 
 const validationSchema = Yup.object({
   username: Yup.string().required("Username is required"),
-  password: Yup.string().required("Password is required"),
+  password: Yup.string().required("New Password is required"),
 });
 
-function Main(props) {
+function UpdatePassword(props) {
   const classes = useStyles();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const loginFunc = (data) => {
+  const admin_id = localStorage.getItem("admin-id");
+
+  const updatePass = (data) => {
     setLoading(true);
-    fetch(`https://ikonmarketing.pk/mobileapp/v1/login`, {
-      method: "POST",
+    fetch(`https://ikonmarketing.pk/mobileapp/v1/admins/${admin_id}`, {
+      method: "PATCH",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -72,15 +74,10 @@ function Main(props) {
     })
       .then((res) => res.json())
       .then((result) => {
-        if (result.statusCode === 201) {
-          localStorage.setItem("admin-id", result.data.admin_id);
-          localStorage.setItem("acc-token", result.data.access_token);
-          localStorage.setItem("ref-token", result.data.refresh_token);
-          localStorage.setItem("user-id", result.data.session_id);
-          props.props.push("/dashboard");
+        if (result.statusCode === 200) {
           setLoading(false);
         } else {
-          setError(result.messages);
+          setError(result.messages[0]);
           setLoading(false);
         }
       })
@@ -95,7 +92,7 @@ function Main(props) {
     <div className="main">
       <div className="logo">
         <img src={logo} style={{ width: "200px", margin: "30px" }} alt="logo" />
-        <h2>Admin Panel</h2>
+        <h2>Update Password</h2>
       </div>
       <div className="loginForm">
         <Container className="Form">
@@ -107,7 +104,7 @@ function Main(props) {
             validationSchema={validationSchema}
             onSubmit={(data, { setSubmitting }) => {
               setSubmitting(true);
-              loginFunc(data);
+              updatePass(data);
               setSubmitting(false);
             }}
           >
@@ -117,9 +114,9 @@ function Main(props) {
                 <MyTextField placeholder="Username" name="username" />
                 <br />
                 <br />
-                <label>Password</label>
+                <label>New Password</label>
                 <MyTextField
-                  placeholder="Password"
+                  placeholder="New Password"
                   name="password"
                   type="password"
                 />
@@ -153,7 +150,7 @@ function Main(props) {
                       value={100}
                     />
                   ) : (
-                    "Login"
+                    "Update Password"
                   )}
                 </Button>
               </Form>
@@ -164,4 +161,4 @@ function Main(props) {
     </div>
   );
 }
-export default Main;
+export default UpdatePassword;

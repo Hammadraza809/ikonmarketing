@@ -10,10 +10,17 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { Group, ExitToApp, Forum, Notifications } from "@material-ui/icons";
+import {
+  Group,
+  ExitToApp,
+  Forum,
+  Notifications,
+  Lock,
+} from "@material-ui/icons";
 import Chat from "../dashboard/pages/chat/Index";
 import Members from "./pages/Members";
 import Notification from "../dashboard/pages/notification/Notification";
+import UpdatePassword from "./pages/UpdatePassword";
 
 const drawerWidth = 210;
 
@@ -44,14 +51,15 @@ export default function ClippedDrawer(props) {
   const classes = useStyles();
   const [fragment, setFragment] = useState("Members");
 
-  // const userid = localStorage.getItem('user-id');
-  // const acc_token = localStorage.getItem('acc-token');
-  // const ref_token = localStorage.getItem('ref-token');
+  // const admin_id = localStorage.getItem("admin-id");
+  const userid = localStorage.getItem("user-id");
+  const acc_token = localStorage.getItem("acc-token");
+  // const ref_token = localStorage.getItem("ref-token");
 
-  // if (localStorage.getItem('acc-token') === null) {
-  //     props.props.push('/restricted');
-  //     return null;
-  // }
+  if (localStorage.getItem("acc-token") === null) {
+    props.props.push("/restricted");
+    return null;
+  }
 
   const loadFragment = () => {
     switch (fragment) {
@@ -61,6 +69,8 @@ export default function ClippedDrawer(props) {
         return <Chat props={props} />;
       case "notification":
         return <Notification />;
+      case "updatePass":
+        return <UpdatePassword />;
       default:
         break;
     }
@@ -109,33 +119,43 @@ export default function ClippedDrawer(props) {
               <ListItemText primary="Add Notification" />
             </ListItem>
           </List>
+          <List>
+            <ListItem button onClick={(e) => setFragment("updatePass")}>
+              <ListItemIcon>
+                <Lock />
+              </ListItemIcon>
+              <ListItemText primary="Update Password" />
+            </ListItem>
+          </List>
           <Divider />
           <List>
             <ListItem
               button
               onClick={() => {
-                console.log("Logout");
-                // fetch(`https://mydreamcommittee.com/v1/logout/${userid}`,{
-                //     method:'DELETE',
-                //     headers:{
-                //         'Accept':'application/json',
-                //         'Content-Type':'application/json',
-                //         'Authorization' : acc_token,
-                //     },
-                // })
-                // .then(res => res.json())
-                // .then(result => {
-                //     if(result.statusCode === 200){
-                //         localStorage.removeItem('acc-token');
-                //         localStorage.removeItem('ref-token');
-                //         localStorage.removeItem('user-id');
-                //         props.props.push('/admin')
-                //     }
-                //     else {
-                //         return null;
-                //     }
-                // })
-                // .catch(err => console.log(err))
+                fetch(
+                  `https://ikonmarketing.pk/mobileapp/v1/logout/${userid}`,
+                  {
+                    method: "DELETE",
+                    headers: {
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                      Authorization: acc_token,
+                    },
+                  }
+                )
+                  .then((res) => res.json())
+                  .then((result) => {
+                    if (result.statusCode === 200) {
+                      localStorage.removeItem("admin-id");
+                      localStorage.removeItem("acc-token");
+                      localStorage.removeItem("ref-token");
+                      localStorage.removeItem("user-id");
+                      props.props.push("/");
+                    } else {
+                      return null;
+                    }
+                  })
+                  .catch((err) => console.log(err));
               }}
             >
               <ListItemIcon>
