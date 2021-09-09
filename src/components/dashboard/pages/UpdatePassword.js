@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ShowModal from "../../dashboard/common/ShowModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,8 +57,14 @@ function UpdatePassword(props) {
   const classes = useStyles();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [response, setResponse] = useState([null]);
 
   const admin_id = localStorage.getItem("admin-id");
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const updatePass = (data) => {
     setLoading(true);
@@ -76,9 +83,13 @@ function UpdatePassword(props) {
       .then((result) => {
         if (result.statusCode === 200) {
           setLoading(false);
+          setResponse(result.messages[0]);
+          setOpen(true);
         } else {
           setError(result.messages[0]);
           setLoading(false);
+          setResponse(result.messages[0]);
+          setOpen(true);
         }
       })
       .catch((err) => {
@@ -102,13 +113,14 @@ function UpdatePassword(props) {
               password: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={(data, { setSubmitting }) => {
+            onSubmit={(data, { setSubmitting, resetForm }) => {
               setSubmitting(true);
               updatePass(data);
               setSubmitting(false);
+              resetForm("");
             }}
           >
-            {({ values, errors, isSubmitting }) => (
+            {({ isSubmitting }) => (
               <Form className={classes.root}>
                 <label>Username</label>
                 <MyTextField placeholder="Username" name="username" />
@@ -158,6 +170,7 @@ function UpdatePassword(props) {
           </Formik>
         </Container>
       </div>
+      <ShowModal open={open} onClose={handleClose} res={response} />
     </div>
   );
 }

@@ -109,14 +109,13 @@ function Members() {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {members &&
-                  members.map((member) => (
-                    <StyledTableRow key={member.id}>
-                      <StyledTableCell>{member.name}</StyledTableCell>
-                      <StyledTableCell>{member.email}</StyledTableCell>
-                      <StyledTableCell>{member.phoneNo}</StyledTableCell>
-                    </StyledTableRow>
-                  ))}
+                {members.map((member) => (
+                  <StyledTableRow key={member.id}>
+                    <StyledTableCell>{member.name}</StyledTableCell>
+                    <StyledTableCell>{member.email}</StyledTableCell>
+                    <StyledTableCell>{member.phoneNo}</StyledTableCell>
+                  </StyledTableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

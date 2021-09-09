@@ -9,6 +9,7 @@ import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import firebase from "firebase";
 import Backdrop from "@material-ui/core/Backdrop";
+import ShowModal from "../../../dashboard/common/ShowModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +45,12 @@ function Notification() {
   const [loading, setLoading] = useState(false);
   const [tokens, setTokens] = useState([]);
   const [backdrop, setBackdrop] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [response, setResponse] = useState([null]);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setBackdrop(true);
@@ -87,8 +94,14 @@ function Notification() {
       })
         .then((result) => {
           setLoading(false);
+          setResponse("Notification send to all members.");
+          setOpen(true);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setResponse("Error. Notification failed to send.");
+          setOpen(true);
+        });
     }
     firebase
       .firestore()
@@ -178,6 +191,7 @@ function Notification() {
       <Backdrop style={{ zIndex: 100 }} open={backdrop}>
         <CircularProgress color="inherit" />
       </Backdrop>
+      <ShowModal open={open} onClose={handleClose} res={response} />
     </div>
   );
 }
