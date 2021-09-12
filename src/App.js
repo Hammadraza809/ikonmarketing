@@ -6,11 +6,11 @@ import Restricted from "./components/dashboard/common/Restricted";
 
 function App() {
   return (
-    <Router basename={"/mobileapp"}>
+    <Router  basename="/mobileapp">
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/restricted" component={Restricted} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/restricted" component={Restricted} />
       </Switch>
     </Router>
   );
