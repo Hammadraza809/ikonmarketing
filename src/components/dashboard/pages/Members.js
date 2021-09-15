@@ -10,8 +10,8 @@ import {
   Paper,
   withStyles,
 } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Backdrop from "@material-ui/core/Backdrop";
+// import CircularProgress from "@material-ui/core/CircularProgress";
+// import Backdrop from "@material-ui/core/Backdrop";
 import firebase from "firebase";
 
 const StyledTableCell = withStyles((theme) => ({
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 function Members() {
   const classes = useStyles();
   const [members, setMembers] = useState([]);
-  const [backdrop, setBackdrop] = useState(true);
+  // const [backdrop, setBackdrop] = useState(false);
 
   //fetching members
   useEffect(() => {
@@ -80,7 +80,7 @@ function Members() {
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           data.push(doc.data());
-          setBackdrop(false);
+          // setBackdrop(false);
         });
         setMembers(data);
       });
@@ -106,24 +106,27 @@ function Members() {
                   <StyledTableCell>Name</StyledTableCell>
                   <StyledTableCell>Email</StyledTableCell>
                   <StyledTableCell>Contact</StyledTableCell>
+                  <StyledTableCell>Project</StyledTableCell>
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {members.map((member) => (
-                  <StyledTableRow key={member.id}>
-                    <StyledTableCell>{member.name}</StyledTableCell>
-                    <StyledTableCell>{member.email}</StyledTableCell>
-                    <StyledTableCell>{member.phoneNo}</StyledTableCell>
-                  </StyledTableRow>
-                ))}
+                {members &&
+                  members.map((member) => (
+                    <StyledTableRow key={member.id}>
+                      <StyledTableCell>{member.name}</StyledTableCell>
+                      <StyledTableCell>{member.email}</StyledTableCell>
+                      <StyledTableCell>{member.phoneNo}</StyledTableCell>
+                      <StyledTableCell>{member.project}</StyledTableCell>
+                    </StyledTableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
         </div>
       </div>
-      <Backdrop style={{ zIndex: 100 }} open={backdrop}>
+      {/* <Backdrop style={{ zIndex: 100 }} open={backdrop}>
         <CircularProgress color="inherit" />
-      </Backdrop>
+      </Backdrop> */}
     </div>
   );
 }

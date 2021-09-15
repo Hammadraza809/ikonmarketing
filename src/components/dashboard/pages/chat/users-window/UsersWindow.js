@@ -3,10 +3,12 @@ import "../Content.css";
 import ChatThumb from "./chat-thumb/ChatThumb";
 import { Link } from "react-router-dom";
 import { getChatRoom } from "../../../firebase";
+import NewUserWindow from "../users-window/NewUsersWindow";
 
 class UsersWindow extends Component {
   constructor(props) {
     super(props);
+    this.isContact = false;
     this.state = {
       data: [
         {
@@ -30,14 +32,14 @@ class UsersWindow extends Component {
     localStorage.setItem(
       "UserInfo",
       JSON.stringify({
-        userName: e.userName,
+        userName: e.name,
         userImage: e.userImage,
         receiverId: e.senderId,
       })
     );
   }
   render() {
-    const { data } = this.state;
+    const { data, isContact } = this.state;
     return (
       <div className="user-window-wraper">
         <div className="user-window">
@@ -45,20 +47,36 @@ class UsersWindow extends Component {
             <div className="recent-chats-heading">
               <p>recent chats</p>
             </div>
+            <div
+              style={{ cursor: "pointer" }}
+              className="new-chats-heading"
+              onClick={(e) => {
+                this.setState({ isContact: !isContact });
+              }}
+            >
+              +
+            </div>
           </div>
-          <div className="recent-chats">
-            {data.map((e, i) => {
-              return (
-                <Link
-                  to={`/dashboard/chat/${e.id}`}
-                  onClick={() => this.showChat(e)}
-                  key={i}
-                >
-                  <ChatThumb data={e} />
-                </Link>
-              );
-            })}
-          </div>
+          {!isContact ? (
+            <div className="recent-chats">
+              {data.map((e, i) => {
+                return (
+                  <Link
+                    to={`/dashboard/chat/${e.id}`}
+                    onClick={() => {
+                      this.showChat(e);
+                      console.log(e);
+                    }}
+                    key={i}
+                  >
+                    <ChatThumb data={e} />
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+            <NewUserWindow />
+          )}
         </div>
       </div>
     );

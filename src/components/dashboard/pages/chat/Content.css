@@ -40,6 +40,14 @@
   text-transform: capitalize;
   font-weight: lighter;
 }
+
+.new-chats-heading {
+  padding: 0px 10px 12px 10px;
+  font-size: 30px;
+  text-transform: capitalize;
+  font-weight: lighter;
+  margin-right: 20px;
+}
 .recent-chats {
   overflow-y: hidden;
   height: calc(100vh - calc(80vh / 2));
@@ -48,7 +56,7 @@
 
 .chat-thumb {
   display: flex;
-  padding: 5px 5px;
+  /* padding: 5px 5px; */
   position: relative;
   cursor: pointer;
   user-select: none;
@@ -70,11 +78,11 @@
   margin-bottom: 12px;
 }
 .name {
-  margin-left: 60px;
+  margin-left: 30px;
   font-size: 15px;
   columns: #000000;
   font-weight: 500;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   color: black;
 }
 
@@ -101,10 +109,12 @@
 }
 .chat-info {
   display: flex;
+  margin: 10px;
+  /* margin-bottom: 10px; */
 }
 .name-last-seen {
-  padding-top: 20px;
-  margin-left: 15px;
+  /* padding-top: 20px; */
+  /* margin-left: 15px; */
   text-transform: capitalize;
   font-size: 20px;
 }

@@ -20,8 +20,25 @@ function getChatRoom() {
   });
 }
 
+function getAllUser() {
+  let users = [];
+  return new Promise((resolve, reject) => {
+    firebase
+      .firestore()
+      .collection("Users")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          const obj = { id: doc.id, ...doc.data() };
+          users.push(obj);
+        });
+        resolve(users);
+      })
+      .catch((err) => reject(err));
+  });
+}
+
 function sendMessageToDB(obj, roomId) {
- 
   firebase
     .firestore()
     .collection("ChatRooms")
@@ -30,4 +47,4 @@ function sendMessageToDB(obj, roomId) {
     .add(obj);
 }
 
-export { getChatRoom, sendMessageToDB };
+export { getChatRoom, sendMessageToDB, getAllUser };
