@@ -34,7 +34,7 @@ class NewUsersWindow extends Component {
       JSON.stringify({
         userName: e.name,
         userImage: e.userImage,
-        receiverId: e.senderId,
+        receiverId: e.id,
       })
     );
   }
