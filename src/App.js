@@ -3,10 +3,19 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/home/Index";
 import Dashboard from "./components/dashboard/Index";
 import Restricted from "./components/dashboard/common/Restricted";
+import { requestFirebaseNotificationPermission } from "./components/dashboard/firebase/index";
 
 function App() {
+  requestFirebaseNotificationPermission()
+    .then((firebaseToken) => {
+      // eslint-disable-next-line no-console
+      console.log(firebaseToken);
+    })
+    .catch((err) => {
+      return err;
+    });
   return (
-    <Router  basename="/mobileapp">
+    <Router basename="/mobileapp">
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/dashboard" component={Dashboard} />

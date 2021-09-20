@@ -65,7 +65,6 @@ class UsersWindow extends Component {
                     to={`/dashboard/chat/${e.id}`}
                     onClick={() => {
                       this.showChat(e);
-                      console.log(e);
                     }}
                     key={i}
                   >

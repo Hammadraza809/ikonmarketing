@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import firebase from "firebase";
 import "../../Content.css";
 import send from "../../../../../../assets/images/send.png";
-import {
-  sendMessageToDB,
-  requestFirebaseNotificationPermission,
-} from "../../../../firebase";
+import { sendMessageToDB } from "../../../../firebase";
 
 const moment = require("moment");
 
@@ -23,14 +20,6 @@ export class Chat extends Component {
   }
 
   componentDidMount() {
-    requestFirebaseNotificationPermission()
-      .then((firebaseToken) => {
-        // eslint-disable-next-line no-console
-        console.log(firebaseToken);
-      })
-      .catch((err) => {
-        return err;
-      });
     this.getConversation(this.getUserId());
   }
 
