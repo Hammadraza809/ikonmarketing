@@ -1,6 +1,4 @@
 import firebase from "firebase";
-import { messaging } from "../../../components/dashboard/pages/common/Config";
-
 function getChatRoom() {
   let chatroom = [];
   return new Promise((resolve, reject) => {
@@ -48,24 +46,10 @@ function sendMessageToDB(obj, roomId) {
     .add(obj);
 }
 
-export const requestFirebaseNotificationPermission = () =>
-  new Promise((resolve, reject) => {
-    messaging
-      .requestPermission()
-      .then(() => messaging.getToken())
-      .then((firebaseToken) => {
-        resolve(firebaseToken);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
 
-export const onMessageListener = () =>
-  new Promise((resolve) => {
-    messaging.onMessage((payload) => {
-      resolve(payload);
-    });
-  });
 
-export { getChatRoom, sendMessageToDB, getAllUser };
+export {
+  getChatRoom,
+  sendMessageToDB,
+  getAllUser,
+};

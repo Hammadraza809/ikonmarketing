@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "firebase/messaging";
 
 const firebaseConfig = {
@@ -20,4 +20,25 @@ const db = firebaseApp.firestore();
 
 const messaging = firebase.messaging();
 
-export { auth, db, messaging };
+
+export const requestFirebaseNotificationPermission = () =>
+  new Promise((resolve, reject) => {
+    messaging
+      .requestPermission()
+      .then(() => messaging.getToken())
+      .then((firebaseToken) => {
+        console.log(firebaseToken);
+        // resolve(firebaseToken);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+export const onMessageListener = () =>
+  new Promise((resolve) => {
+    messaging.onMessage((payload) => {
+      resolve(payload);
+    });
+  });
+export { auth, db };
