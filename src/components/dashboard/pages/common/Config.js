@@ -20,7 +20,6 @@ const db = firebaseApp.firestore();
 
 const messaging = firebase.messaging();
 
-
 export const requestFirebaseNotificationPermission = () =>
   new Promise((resolve, reject) => {
     messaging
@@ -28,7 +27,7 @@ export const requestFirebaseNotificationPermission = () =>
       .then(() => messaging.getToken())
       .then((firebaseToken) => {
         console.log(firebaseToken);
-        // resolve(firebaseToken);
+        resolve(firebaseToken);
       })
       .catch((err) => {
         reject(err);

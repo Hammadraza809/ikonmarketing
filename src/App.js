@@ -6,11 +6,9 @@ import Restricted from "./components/dashboard/common/Restricted";
 import { requestFirebaseNotificationPermission } from "./components/dashboard/pages/common/Config";
 
 function App() {
-
   requestFirebaseNotificationPermission()
     .then((firebaseToken) => {
       // eslint-disable-next-line no-console
-      console.log(firebaseToken);
     })
     .catch((err) => {
       return err;
