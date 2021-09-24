@@ -79,6 +79,15 @@ function Main(props) {
           localStorage.setItem("user-id", result.data.session_id);
           props.props.push("/dashboard");
           setLoading(false);
+          // requestFirebaseNotificationPermission()
+          //   .then((firebaseToken) => {
+          //     db.collection("FcmTokens")
+          //       .doc()
+          //       .set({ fcm_token: firebaseToken });
+          //   })
+          //   .catch((err) => {
+          //     return err;
+          //   });
         } else {
           setError(result.messages);
           setLoading(false);

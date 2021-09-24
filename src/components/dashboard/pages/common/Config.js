@@ -1,5 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/messaging";
+require("firebase/auth");
+require("firebase/firestore");
 
 const firebaseConfig = {
   apiKey: "AIzaSyCx9A-MgqIp3RyyXbKjZn1V_IuBJTakYV4",
@@ -26,7 +28,6 @@ export const requestFirebaseNotificationPermission = () =>
       .requestPermission()
       .then(() => messaging.getToken())
       .then((firebaseToken) => {
-        console.log(firebaseToken);
         resolve(firebaseToken);
       })
       .catch((err) => {
