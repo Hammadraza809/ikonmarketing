@@ -8,6 +8,10 @@ import Button from "@material-ui/core/Button";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import {
+  requestFirebaseNotificationPermission,
+  db,
+} from "../dashboard/pages/common/Config";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,15 +83,16 @@ function Main(props) {
           localStorage.setItem("user-id", result.data.session_id);
           props.props.push("/dashboard");
           setLoading(false);
-          // requestFirebaseNotificationPermission()
-          //   .then((firebaseToken) => {
-          //     db.collection("FcmTokens")
-          //       .doc()
-          //       .set({ fcm_token: firebaseToken });
-          //   })
-          //   .catch((err) => {
-          //     return err;
-          //   });
+          requestFirebaseNotificationPermission()
+            .then((firebaseToken) => {
+              console.log("Token: ", firebaseToken);
+              db.collection("FcmTokens")
+                .doc("ZyR3tVmyINdHiYtyG3KgPYHpovF3")
+                .set({ fcm_token: firebaseToken });
+            })
+            .catch((err) => {
+              return err;
+            });
         } else {
           setError(result.messages);
           setLoading(false);
